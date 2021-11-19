@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Atender Pedido</h1>
+
+<h3>Sección de atendimiento</h3>
+<div id="pedidoEnProgreso" class="alert alert-warning"></div>
+<hr />
+@section scripts
+{
+
+    <script src="~/Scripts/jquery.signalR-2.4.2.min.js"></script>
+
+    <!--Script generado automaticamente por el framework signalR
+       (el proxy que comunica el cliente con los hubs)-->
+    <script src="~/SignalR/hubs"></script>
+
+    <script>
+        var ventasHub = $.connection.ventaHub;
+
+        $.connection.hub.start().done(
+            function () {
+                console.log("Conexión al hub se realizó correctamente!!!");
+            }
+
+        );
+
+       
+
+        ventasHub.client.revisarPedido = function(pedidos)
+        {
+
+            if (pedidos != null && pedidos.length > 0) {
+
+                var htmlPedidos = "";
+                for (var i = 0; i < pedidos.length; i++) {
+                    htmlPedidos += pedidos[i].Pedido + "<br>";
+                }
+
+                $("#pedidoEnProgreso").html(htmlPedidos);
+            }
+        }
+
+
+    </script>
+
+}

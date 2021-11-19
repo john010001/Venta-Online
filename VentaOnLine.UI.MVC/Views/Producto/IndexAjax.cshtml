@@ -1,0 +1,65 @@
+﻿
+@model VentaOnLine.UI.MVC.Models.ProductoViewModels.BusquedaProductosViewModel
+
+@{
+    ViewBag.Title = "Listadode productos";
+}
+<div class="pb-3">
+    @*
+        BeginForm com area de mvc
+        @using (Ajax.BeginForm("IndexResultadoAjax", "Producto", new { area = "AdminPedidos" },*@
+    @using (Ajax.BeginForm("IndexResultadoAjax", "Producto",
+    new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "listado"
+    }, new { @class = "row" }
+))
+    {
+        <div class="col-auto">
+            <div class="row">
+                <label for="nombre" class="col-auto pt-1">Categorías:</label>
+                <div class="col-auto">
+                    @Html.DropDownListFor(item => item.IdCategoria,
+                         Model.Categorias,
+                         "Todas",
+                         new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="row">
+                <label for="nombre" class="col-auto pt-1">Producto:</label>
+                <div class="col-auto">
+                    @Html.EditorFor(item => item.NombreProducto,
+                                new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-secondary btn-nuevo">Nuevo</button>
+        </div>
+    }
+</div>
+
+<div id="listado" class="pb-3">
+
+
+
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        $(document).ready(app.paginas.admin.productos.init);
+
+    </script>
+}
+
+
+

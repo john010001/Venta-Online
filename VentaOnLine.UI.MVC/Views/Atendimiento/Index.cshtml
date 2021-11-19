@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Atender Pedido</h1>
+
+<h3>Sección del Cliente</h3>
+<label>Numero pedido: <input class="nroPedido form-control" /></label>
+<button class="btn btn-success" onclick="AtenderPedido()">Atender Pedido</button>
+
+@section scripts
+{
+
+    <script src="~/Scripts/jquery.signalR-2.4.2.min.js"></script>
+
+    <!--Script generado automaticamente por el framework signalR
+       (el proxy que comunica el cliente con los hubs)-->
+    <script src="~/SignalR/hubs"></script>
+
+    <script>
+        var ventasHub = $.connection.ventaHub;
+
+        $.connection.hub.start().done(
+            function () {
+                console.log("Conexión al hub se realizó correctamente!!!");
+            }
+
+        );
+
+        function AtenderPedido() {
+
+            var pedido = $(".nroPedido").val();
+
+          
+            ventasHub.server.monitorearPedido(pedido);
+
+        }
+
+      
+
+
+    </script>
+
+}

@@ -1,0 +1,47 @@
+﻿@model VentaOnLine.UI.MVC.Models.ProductoViewModels.BusquedaProductosViewModel
+
+@{
+    ViewBag.Title = "Listadode productos";
+}
+<div class="pb-3">
+    <form method="post" class="row">
+        <div class="col-auto">
+            <div class="row">
+                <label for="nombre" class="col-auto pt-1">Categorías:</label>
+                <div class="col-auto">
+                    @Html.DropDownListFor(item => item.IdCategoria,
+                                        Model.Categorias,
+                                        "Todas",
+                                        new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="row">
+                <label for="nombre" class="col-auto pt-1">Producto:</label>
+                <div class="col-auto">
+                    @Html.EditorFor(item => item.NombreProducto,
+                                new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-primary btn-buscar">Buscar</button>
+        </div>
+    </form>
+</div>
+
+<div class="pb-3" id="listado">
+
+    
+
+</div>
+
+@section scripts
+{
+<script type="text/javascript">
+
+    $(document).ready(app.paginas.admin.productos.init);
+
+</script>
+}

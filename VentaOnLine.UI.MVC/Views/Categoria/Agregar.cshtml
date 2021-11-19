@@ -1,0 +1,22 @@
+﻿@model VentaOnLine.Application.Queries.ObtenerCategoria.ObtenerCategoriaQueryResult
+
+    <form method="post" action="@Url.Action("Guardar")">
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" name="IdCategoria" value="@Model.Id" />
+
+        <div class="mb-3 row">
+            <label for="Nombre" class="form-label">Nombre</label>
+            <div class="col-9">
+                <input type="text" class="form-control" id="Nombre" name="Nombre" required value="@Model.Nombre">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Grabar</button>
+            </div>
+            <div class="col-auto">
+                <a href="~/categoria/index" class="btn btn-secondary">Listar</a>
+            </div>
+        </div>
+    </form>

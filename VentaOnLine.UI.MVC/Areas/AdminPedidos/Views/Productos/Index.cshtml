@@ -1,0 +1,65 @@
+﻿@model VentaOnLine.UI.MVC.Models.ProductoViewModels.BusquedaProductosViewModel
+
+@{
+    ViewBag.Title = "Listadode productos";
+}
+<div class="pb-3">
+    <form method="post" class="row">
+        <div class="col-auto">
+            <div class="row">
+                <label for="nombre" class="col-auto pt-1">Categorías:</label>
+                <div class="col-auto">
+                    @Html.DropDownListFor(item => item.IdCategoria,
+                                        Model.Categorias,
+                                        "Todas",
+                                        new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="row">
+                <label for="nombre" class="col-auto pt-1">Producto:</label>
+                <div class="col-auto">
+                    @Html.EditorFor(item => item.NombreProducto,
+                                new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+    </form>
+</div>
+
+<div class="pb-3">
+
+    <table class="table">
+        <tr>
+            <th>Categoría</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Estado</th>
+            <th>Fecha creación</th>
+        </tr>
+
+        @if (Model.Resultado != null)
+        {
+            foreach (var item in Model.Resultado)
+            {
+                <tr>
+                    <td>@item.NombreCategoria</td>
+                    <td>@item.NombreProducto</td>
+                    <td>@item.Precio</td>
+                    <td>@item.Stock</td>
+                    <td>
+                        @Html.Partial("_EstadoEntidad", item.Estado)
+                    </td>
+                    <td>@item.FechaCreacion</td>
+                </tr>
+            }
+        }
+
+    </table>
+
+    </div>

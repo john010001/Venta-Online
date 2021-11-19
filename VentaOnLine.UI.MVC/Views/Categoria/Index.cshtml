@@ -1,0 +1,70 @@
+﻿@model List<VentaOnLine.Application.Queries.ListarCategorias.ListarCategoriaQueryResult>
+
+@{
+    ViewBag.Title = "Listado de categorías";
+}
+
+<div class="pb-3">
+    <form method="post" class="row">
+        <div class="col-auto">
+            <div class="row">
+                <label for="nombre" class="col-auto pt-1">Búsqueda por nombre:</label>
+                <div class="col-auto">
+                    <input type="text" class="form-control" id="nombre" name="Nombre"
+                           placeholder="Categoría a buscar" value="@ViewBag.FiltroPorNombre">
+                </div>
+            </div>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+            @* <a href="@Url.Action("Agregar","Categoria")" class="btn btn-secondary">Nuevo</a>*@
+            <button type="button" class="btn btn-secondary btn-nuevo">Nuevo</button>
+        </div>
+    </form>
+</div>
+
+<div class="pb-3">
+    <table class="table">
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Estado</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @*<a href="~/Categoria/Modificar/@item.Id">*@
+                    @*<a href="@Url.Action("Modificar","Categoria", new { @id=item.Id})">
+                        @item.Id
+                    </a>*@
+
+                    <a href="#" onclick="app.paginas.admin.categoria.editar(@item.Id)">
+                        @item.Id
+                    </a>
+
+                </td>
+                <td>@item.Nombre</td>
+                <td>
+                    @Html.Partial("_EstadoEntidad", item.Estado)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+
+    $(document).ready(app.paginas.admin.categoria.init);
+
+    </script>
+}
+
+
+
+
